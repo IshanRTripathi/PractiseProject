@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'joda-time:joda-time:2.10.13'
+    implementation 'joda-time:joda-time-hibernate:1.4'
+    implementation 'io.github.jamsesso:json-logic-java:1.0.7'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
