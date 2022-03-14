@@ -1,0 +1,14 @@
+git pull
+// do the dev work
+git add <name of file>
+or
+git add .
+
+git commit -m "<JIRA Ticket Number> This is my commit"
+
+
+git push
+
+// intermediate
+git merge
+git rebase
