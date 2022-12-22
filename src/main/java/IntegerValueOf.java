@@ -8,6 +8,10 @@ public class IntegerValueOf {
 //            ))));
 //        System.out.println(Long.parseLong("0"));
         System.out.println((int) Double.parseDouble("0.000"));
+        Double dd = 10.0;
+//                   Long.parseLong(String.valueOf((int) Double.parseDouble(item.getQuantity().getQuantityNumber().toString())))
+//        Long res = Long.parseLong(Integer.paString.valueOf(Math.abs(dd)));
+//        System.out.println(res);
     }
     private static boolean isPositiveInteger(String str) {
         if (str == null || str.length() == 0) {

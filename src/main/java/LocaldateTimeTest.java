@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -18,7 +19,8 @@ public class LocaldateTimeTest {
 //        System.out.println(LocalDateTime.now().atZone(ZoneOffset.UTC).format(customFormatter2));
 //        System.out.println(LocalDateTime.now().atZone(ZoneOffset.UTC).format(customFormatter3));
 //        System.out.println(ZonedDateTime.parse(LocalDateTime.now().toString()).withZoneSameLocal(ZoneOffset.UTC).format(customFormatter));
-        System.out.println(ZonedDateTime.ofInstant(LocalDateTime.now().toInstant(ZoneOffset.UTC), ZoneId.systemDefault()).format(customFormatter));
+//        System.out.println(ZonedDateTime.ofInstant(LocalDateTime.now().toInstant(ZoneOffset.UTC), ZoneId.systemDefault()).format(customFormatter));
 //        System.out.println((int)Double.parseDouble("999.0"));
+        System.out.println(OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")));
     }
 }
