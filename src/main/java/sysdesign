@@ -1,0 +1,32 @@
+ 1. Consistent
+ 2. Availability
+ 3. Auth
+ 4. gateway
+ 5. loadbalancer
+ 6. cdn
+ 7. redis
+
+
+ Product
+ 1. id
+ 2. description
+ 3. rating
+ 4. reviews -> url + rating + userId + description
+
+ Item
+ 1. id/url to a product
+ 2. audit -> created date, modified date, modified by
+ 3. quantity
+
+
+
+ User
+ 1. userid
+ 2. cart -> list<items> active,  list<items> saved later, list<items> ordered items
+ 3. Set of interests
+ 4. List<contact> ->
+
+ contact
+ 1. number
+ 2. email
+ 3. address -> addressline1, street,
