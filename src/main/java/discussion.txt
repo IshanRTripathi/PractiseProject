@@ -1,0 +1,10 @@
+1. get the dns associated with the url
+2. ip address + port number
+3. chrome loads and runs the index.html
+4. it also takes care of the runtime links associated in the html file
+5. interact with eelements and send the trigger to respective element which is handling the trigger
+6. buttons => onClick, onHover
+
+
+client      server
+request =>  asks for credentails

@@ -1,0 +1,96 @@
+Flow -
+ Sellers upload the item information that needs to be sent from their location to warehouse location.
+ In acknoledgement they just need one ID to track their order status.
+ Sellers are flexible to choose their own mode of transport/logistics to ove the items
+    - Use own transport, pickup truck or something
+    - Ask for falabella's transport
+    - Connect with 3rd party logistics organisations
+ End result -> The items mentioned by the sellers are moved to the appropriate warehouse
+
+Requirements -
+    1. GCP logging, pub/sub, APM -> Datadog to analyse metrics and other KPI
+    2. PostgreSQL -> Consistency and better Availability
+    3. The end users (sellers) should expect prompt response from the API. (6-7 sec => <1 sec doing performance tuning)
+
+High Level Flow -
+    1. Hit the post endpoint and get an acknoledgement in return such as an id of the order created
+    2. validating the request body
+    3. Catalog service => keeps track of items information. We connect to this service to make sure that the items are present in their catalog
+    4. Destination -> makes sure that the origin and destination information are valid. The destination should be a warehouse
+    5. Internal services like audit to keep track of overall flow of items, state management that keeps track of state of the order, each order item as well as each single quantity of an item.
+    6. Inventory and warehouse services that share info about an item's availability as well as free space based on item dimensions and it's type
+        a. certain warehouses only support items which are not fragile, or items that are not flammable, etc
+    7. Slot registration based on the type of transport selected by the seller during order placement
+
+Low Level Table Design
+    1. Order => id, audit, list of destinations
+    2. Items => id, type (flammable, fraglie), requested quantity, destroyed quantity, reserved quantity
+    3. Item properties =>
+    4. Destinations => id, destination_info_id, item_id, list of items
+
+destination_info_id = node id (7000, 7001, 7002) + node type (Warehouse, Store, Ikea store)
+
+====================================================================================================================================
+
+Design linkedin
+
+Follow users
+Create posts (text, image, video)
+Interact with posts(like, comment, share)
+
+Follow =>
+    1. High consistency => postgreSQl
+    2. notification service => notifies the user if he has been followed
+
+Create posts =>
+    1. Not necessarily be highly consistent => can use nosql like mongodb
+    2. can cache posts based on following list
+    3. use cdn to store content
+
+Interactions =>
+    1. Highly consistent =>
+    2. Notification service (can use pubsub model)
+
+
+Post  => indexing based on userid
+    - postId (UUID)
+    - resourceType (TEXT, IMAGE, GIF, VIDEO)
+    - static link to resource
+    - description
+    - List<Tags> tags
+    - userId
+    - timestamp (created, updated)
+    - List<Likes> likedBy    {
+                                 - interactedByUserId
+                                 - timestamp }
+    - List<Comment> comments
+                                    - interactedByUserId
+                                    - timestamp
+                                    - content
+    - List<Share> share
+                               - sharedByUserId
+                               - timestamp
+
+
+
+
+Users
+    - userId (UUID)
+    - List<UUID> postIds
+    - List<UUID> followingUserIds
+    - List<UUID> followedByUserIds
+    - List<UUID> activities
+    - metadata -> profile info, contact, username password
+
+Activity
+    - id
+    - activityType(LIKE, COMMENT, SHARE)
+    - postid
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SubstringQuestion {
     public static void main(String[] args) {
@@ -8,6 +9,19 @@ public class SubstringQuestion {
         String input2 = "MaNIshanR";
 
         System.out.println(findSubstringsWithCapitalBoundaries(input2));
+
+
+        List<EmployeeDetails> employeeDetails = List.of(new EmployeeDetails("1", 12345, "eng1"),
+            new EmployeeDetails("2", 4567, "eng2"),
+            new EmployeeDetails("3", 8765, "manager"));
+
+        employeeDetails.stream()
+            .map(EmployeeDetails::getSalary)
+            .filter(salary -> salary > 5000 && salary< 10000)
+            .collect(Collectors.toList());
+
+//        select * from employee e,
+//            where e.empid not in (select con.empid from contacts con)
 
     }
 
@@ -42,5 +56,21 @@ public class SubstringQuestion {
             right++;
         }
         return substringsWithCapitalBoundaries;
+    }
+}
+class EmployeeDetails {
+
+    String empid;
+    Integer salary;
+    String designation;
+
+    EmployeeDetails(String empid, Integer salary, String designation) {
+        this.designation = designation;
+        this.salary = salary;
+        this.empid = empid;
+    }
+
+    public Integer getSalary() {
+        return this.salary;
     }
 }

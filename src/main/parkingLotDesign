@@ -1,0 +1,97 @@
+Requirements:
+1. Multiple entry and exits => 2 each
+2. Multiple floors => 3 floors
+3. Multiple vehicle support
+4. Entry => slip that logs timestamp + id, Exit => calculate the price
+
+
+class Vehicle {
+    String vehicleId;
+    VehicleType type;
+    Color color;
+    String registrationNumber;
+    TimeStamp startTime;
+    TimeStamp endTime;
+    String slotId;
+}
+
+class Slot {
+    String slotId;
+    Set<VehicleType> supportedVehicleTypes;
+    String floorNumber;
+    boolean isOccupied;
+}
+
+interface Pricing {
+    double calculatePrice(Vehicle vehicle);
+}
+
+class SmallVehicle extends Vehicle implements Pricing {
+    double calculatePrice() {
+        if(endTime == null) throw InvalidEndTimeException();
+        return 1.0 * (endTime - startTime) * 25;
+    }
+}
+
+class MediumVehicle extends Vehicle implements Pricing {
+    double calculatePrice() {
+        return 1.5 * (endTime - startTime) * 25;
+    }
+}
+
+class BigVehicle extends Vehicle implements Pricing {
+    double calculatePrice() {
+        return 2.5 * (endTime - startTime) * 25;
+    }
+}
+
+enum VehicleType {
+    SMALL,
+    BIG,
+    MEDIUM
+}
+
+enum Color {
+    RED,
+    BLUE,
+    BLACK,
+    WHITE
+}
+
+class InvalidEndTimeException extends RunTimeException {
+    public InvalidEndTimeException() {
+        super();
+    }
+}
+
+class ParkingSimulator {
+    PriorityQueue<Slot> availableSlots;
+
+    public ParkingSimulator () {
+        availableSlots = new PriorirtyQueue<>((a, b) -> {
+            // give more priority to isOccupied = false && floorNumber is lower
+        });
+    }
+    initialiseVehicle(String vehicleId,
+                          VehicleType type,
+                          Color color,
+                          String registrationNumber,
+                          TimeStamp startTime) {
+         // create vehicle entity
+         // getAvailableSlots and assign it to vehicle
+         // save it to Database
+         Vehicle vehicle = new SmallVehicle(..., ... );
+    }
+
+    getAvailableSlots(VehicleType type) {
+        // fetch all slot configs
+        // get one slot which is occupied but also with lowest floor number
+        // return one slot
+    }
+
+    processExit(Vehicle vehicle) {
+        vehicle.setEndTime(System.getCurrentTimeInMillis());
+        var price  = vehicle.calculatePrice();
+        // trigger the printer to porint the receipt with price
+    }
+}

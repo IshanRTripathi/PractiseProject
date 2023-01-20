@@ -1,0 +1,7 @@
+PriorityQueue<Element> pq = new PriorityQueue<>();
+
+
+Entity
+    1. entityId
+    2. data
+
